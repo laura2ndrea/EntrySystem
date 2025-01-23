@@ -3,7 +3,6 @@ package campus.u2.entrysystem.carnet.application;
 import campus.u2.entrysystem.Utilities.exceptions.GlobalException;
 import campus.u2.entrysystem.carnet.domain.Carnet;
 import campus.u2.entrysystem.people.domain.People;
-import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,7 @@ public class CarnetService {
         this.carnetRepository = carnetRepository;
     }
 
-    //Tp create a carnet 
-    @Transactional
+    //To create a carnet 
     public Carnet saveCarnet(Carnet carnet) {
         if (carnet == null) {
             throw new GlobalException("Empty object, please try again");
@@ -26,7 +24,6 @@ public class CarnetService {
     }
 
     // To create a carnet for a person
-    @Transactional
     public Carnet saveCarnet(People people, Carnet carnet) {
         carnet.setPeople(people);
         people.setCarnet(carnet);
@@ -34,13 +31,11 @@ public class CarnetService {
     }
 
     // To show all the carnets 
-    @Transactional
     public List<Carnet> getAllCarnets() {
         return carnetRepository.getAllCarnets();
     }
 
     // To find a carnet for the id
-    @Transactional
     public Carnet getCarnetById(Long id) {
         if (id == null) {
             throw new GlobalException("ID cannot be empty");
@@ -50,7 +45,6 @@ public class CarnetService {
     }
     
     // To find a carnet by the people 
-    @Transactional
     public Carnet findCarnetByPeople(People people) {
         return carnetRepository.findCarnetByPeople(people)
                 .orElseThrow(() -> new GlobalException("Notfound carnet")); 
