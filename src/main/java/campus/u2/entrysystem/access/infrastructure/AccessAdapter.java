@@ -1,50 +1,55 @@
-package campus.u2.entrysystem.access.application;
+package campus.u2.entrysystem.access.infrastructure;
 
+import campus.u2.entrysystem.access.application.AccessRepository;
 import campus.u2.entrysystem.utilities.exceptions.GlobalException;
 import campus.u2.entrysystem.access.domain.Access;
 import campus.u2.entrysystem.accessnotes.domain.AccessNote;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;
-import campus.u2.entrysystem.porters.application.PortersRepository;
 import campus.u2.entrysystem.porters.domain.Porters;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AccessService {
-
-    // Attributes 
-    private final AccessRepository accessRepository;
-    private final PortersRepository portersRepository;
-
-    // Constructor
-    @Autowired
-    public AccessService(AccessRepository accessRepository, PortersRepository portersRepository) {
-        this.accessRepository = accessRepository;
-        this.portersRepository = portersRepository;
+public class AccessAdapter implements AccessRepository{
+    
+    //Atributtes 
+    private final AccessJpaRepository accessRepository; 
+    
+    // Constructor 
+    public AccessAdapter(AccessJpaRepository accessRepository){
+        this.accessRepository = accessRepository; 
     }
+    
+    //Methods 
 
-    // To create an anccess
+    // To create an ancces
+    @Override 
+    @Transactional
     public Access createAccess(Access access) {
-        if (access == null) {
-            throw new GlobalException("Empty object, please try again ");
-        }
-        return accessRepository.createAccess(access);
+        return accessRepository.save(access);
     }
+    
+   
+    @Transactional
+    // To delete an access
+    public void deletePeople(String cedula) {
 
-    // To delete and access 
-    public void deleteAccess(Long id) {
-        if (id == null) {
-            throw new GlobalException("Id not valid please try again");
+        if (cedula == null) {
+            throw new GlobalException("Incorrect cedula, please try again");
+
         }
-        Optional<Access> accessOpt = accessRepository.getAccessById(id);
-        if (accessOpt.isPresent()) {
-            accessRepository.deleteAccess(accessOpt.get().getIdAccess());
+
+        Optional<People> existingPeopleOpt = peopleRepository.getPeopleByCedula(cedula);
+        if (existingPeopleOpt.isPresent()) {
+            peopleRepository.deletePeople(existingPeopleOpt.get().getId());
         } else {
             throw new GlobalException("Unexpected error, please try again");
         }
+
     }
+
 
     // To get all accesses
     public List<Access> getAllAccesses() {
@@ -54,7 +59,7 @@ public class AccessService {
     // To get an access by id
     public Access getAccessById(Long id) {
         if (id == null) {
-            throw new GlobalException("Id not valid please try again");
+            throw new GlobalException("Id not Valid please try again" + id);
         }
         Optional<Access> accessOpt = accessRepository.getAccessById(id);
         if (accessOpt.isPresent()) {
@@ -75,7 +80,7 @@ public class AccessService {
             return accessRepository.createAccess(accessOpt.get());
 
         } else {
-            throw new GlobalException("Access note with Id" + accessId + "  not found");
+            throw new GlobalException("Access note with Id" + accessId + "  Not Found");
         }
 
     }
@@ -92,7 +97,7 @@ public class AccessService {
         portersRepository.savePorter(porter);
         return access;
     }
-
+    
     // To remove a porter from an access
     public Access removePorterFromAccess(Long accessId, Long porterId) {
         Optional<Access> accessOpt = accessRepository.getAccessById(accessId);
@@ -110,7 +115,7 @@ public class AccessService {
         }
         return null;  // If the porter or the access is not found
     }
-
+    
     // To find all the access between two dates
     public List<Access> findAccessBetweenDates(Date startDate, Date endDate) {
         if (startDate == null || endDate == null) {
