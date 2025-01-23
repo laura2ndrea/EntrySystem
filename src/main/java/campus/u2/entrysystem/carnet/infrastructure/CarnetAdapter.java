@@ -3,6 +3,7 @@ package campus.u2.entrysystem.carnet.infrastructure;
 import campus.u2.entrysystem.carnet.application.CarnetRepository;
 import campus.u2.entrysystem.carnet.domain.Carnet;
 import campus.u2.entrysystem.people.domain.People;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -22,12 +23,14 @@ public class CarnetAdapter implements CarnetRepository{
     
     //To create a carnet 
     @Override
+    @Transactional
     public Carnet saveCarnet(Carnet carnet) {
         return carnetRepository.save(carnet);
     }
 
     // To create a carnet for a person
     @Override
+    @Transactional
     public Carnet saveCarnet(People people, Carnet carnet) {
         carnet.setPeople(people);
         people.setCarnet(carnet);
@@ -36,6 +39,7 @@ public class CarnetAdapter implements CarnetRepository{
 
     // To show all the carnets 
     @Override
+    @Transactional
     public List<Carnet> getAllCarnets() {
         return carnetRepository.findAll();
     }

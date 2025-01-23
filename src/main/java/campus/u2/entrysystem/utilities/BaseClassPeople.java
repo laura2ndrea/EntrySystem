@@ -1,5 +1,5 @@
 
-package campus.u2.entrysystem.Utilities;
+package campus.u2.entrysystem.utilities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

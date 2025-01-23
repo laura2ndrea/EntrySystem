@@ -2,7 +2,7 @@ package campus.u2.entrysystem.porters.domain;
 
 import campus.u2.entrysystem.user.domain.User;
 import campus.u2.entrysystem.access.domain.Access;
-import campus.u2.entrysystem.Utilities.BaseClassPeople;
+import campus.u2.entrysystem.utilities.BaseClassPeople;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

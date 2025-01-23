@@ -1,7 +1,7 @@
 package campus.u2.entrysystem.membership.application;
 
 import campus.u2.entrysystem.membership.domain.Membership;
-import campus.u2.entrysystem.Utilities.exceptions.GlobalException;
+import campus.u2.entrysystem.utilities.exceptions.GlobalException;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;

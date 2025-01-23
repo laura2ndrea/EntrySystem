@@ -1,7 +1,7 @@
 package campus.u2.entrysystem.invoice.application;
 
 import campus.u2.entrysystem.invoice.domain.Invoice;
-import campus.u2.entrysystem.Utilities.exceptions.GlobalException;
+import campus.u2.entrysystem.utilities.exceptions.GlobalException;
 import jakarta.transaction.Transactional;
 import java.util.Date;
 import java.util.List;

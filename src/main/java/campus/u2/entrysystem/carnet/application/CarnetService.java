@@ -1,16 +1,18 @@
 package campus.u2.entrysystem.carnet.application;
 
-import campus.u2.entrysystem.Utilities.exceptions.GlobalException;
+import campus.u2.entrysystem.utilities.exceptions.GlobalException;
 import campus.u2.entrysystem.carnet.domain.Carnet;
 import campus.u2.entrysystem.people.domain.People;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CarnetService {
 
     private final CarnetRepository carnetRepository;
-
+    
+    @Autowired
     public CarnetService(CarnetRepository carnetRepository) {
         this.carnetRepository = carnetRepository;
     }

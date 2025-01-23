@@ -1,6 +1,6 @@
 package campus.u2.entrysystem.porters.application;
 
-import campus.u2.entrysystem.Utilities.exceptions.GlobalException;
+import campus.u2.entrysystem.utilities.exceptions.GlobalException;
 import campus.u2.entrysystem.porters.domain.Porters;
 import jakarta.transaction.Transactional;
 import java.util.List;

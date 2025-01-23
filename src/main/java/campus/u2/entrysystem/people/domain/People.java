@@ -5,7 +5,7 @@ import campus.u2.entrysystem.vehicle.domain.Vehicle;
 import campus.u2.entrysystem.invoice.domain.Invoice;
 import campus.u2.entrysystem.company.domain.Company;
 import campus.u2.entrysystem.carnet.domain.Carnet;
-import campus.u2.entrysystem.Utilities.BaseClassPeople;
+import campus.u2.entrysystem.utilities.BaseClassPeople;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

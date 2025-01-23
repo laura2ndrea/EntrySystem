@@ -1,5 +1,5 @@
 
-package campus.u2.entrysystem.Utilities.exceptions;
+package campus.u2.entrysystem.utilities.exceptions;
 
 
 
